@@ -19,8 +19,6 @@ func main() {
 	logger.Initialize(cfg.Env == envProd)
 	log := logger.Get()
 
-	log.Debug().Any("config", cfg).Msg("config")
-
 	s := server.New(log, 3030)
 	err := s.Start()
 	if err != nil {
