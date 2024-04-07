@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import "github.com/youth-design/fit_app/libs/logger"
 
