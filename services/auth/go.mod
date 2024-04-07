@@ -4,7 +4,7 @@ go 1.22
 
 replace (
 	github.com/youth-design/fit_app/libs/logger v0.0.0 => ../../libs/logger
-	github.com/youth-design/fit_app/protos v.0.0.0 => ./../../protos
+	github.com/youth-design/fit_app/protos v.0.0.0 => ../../protos
 )
 
 require (
