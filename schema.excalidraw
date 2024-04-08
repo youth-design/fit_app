@@ -1352,11 +1352,11 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "grpcService",
+      "text": "grpcServer",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "grpcService",
+      "originalText": "grpcServer",
       "lineHeight": 1.25
     },
     {
@@ -1392,13 +1392,13 @@
       "updated": 1712594368560,
       "link": null,
       "locked": false,
-      "text": "GRPCService",
+      "text": "grpcServer",
       "fontSize": 16,
       "fontFamily": 1,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "GRPCService",
+      "originalText": "grpcServer",
       "lineHeight": 1.25
     },
     {

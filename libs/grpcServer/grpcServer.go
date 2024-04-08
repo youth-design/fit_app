@@ -1,4 +1,4 @@
-package server
+package grpcServer
 
 import (
 	"context"
@@ -6,7 +6,6 @@ import (
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
 	"github.com/youth-design/fit_app/libs/logger"
-	"github.com/youth-design/fit_app/services/auth/internal/grpc/app"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -19,7 +18,7 @@ type Server struct {
 	log        *logger.Logger
 }
 
-func New(log *logger.Logger, port int) *Server {
+func New(log *logger.Logger, port int, serviceDesc *grpc.ServiceDesc, service any) *Server {
 	loggingOpts := []logging.Option{
 		logging.WithLogOnEvents(
 			logging.PayloadReceived, logging.PayloadSent,
@@ -38,7 +37,7 @@ func New(log *logger.Logger, port int) *Server {
 		logging.UnaryServerInterceptor(InterceptorLogger(log), loggingOpts...),
 	))
 
-	app.Register(gRPCServer, log)
+	gRPCServer.RegisterService(serviceDesc, service)
 
 	return &Server{
 		grpcServer: gRPCServer,

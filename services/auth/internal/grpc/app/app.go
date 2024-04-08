@@ -8,17 +8,16 @@ import (
 )
 
 type App struct {
-	fit_app_auth_v0_authv0.UnimplementedAuthServer
-	log *logger.Logger
+	fit_app_auth_v0_authv0.AuthServer
+	log         *logger.Logger
+	Description *grpc.ServiceDesc
 }
 
-func Register(gRPCServer *grpc.Server, log *logger.Logger) {
-	fit_app_auth_v0_authv0.RegisterAuthServer(
-		gRPCServer,
-		&App{
-			log: log,
-		},
-	)
+func New(log *logger.Logger) *App {
+	return &App{
+		log:         log,
+		Description: &fit_app_auth_v0_authv0.Auth_ServiceDesc,
+	}
 }
 
 func (app *App) Register(ctx context.Context, req *fit_app_auth_v0_authv0.RegisterRequest) (*fit_app_auth_v0_authv0.RegisterResponse, error) {

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/youth-design/fit_app/lib/grpcServer"
 	"github.com/youth-design/fit_app/libs/logger"
 	"github.com/youth-design/fit_app/services/auth/internal/config"
-	"github.com/youth-design/fit_app/services/auth/internal/grpc/server"
+	"github.com/youth-design/fit_app/services/auth/internal/grpc/app"
 	"os"
 	"os/signal"
 	"syscall"
@@ -21,8 +22,9 @@ func main() {
 	logger.Initialize(cfg.Env == envProd)
 	log := logger.Get()
 
-	s := server.New(log, 3030)
-	err := s.Start()
+	authApp := app.New(log)
+	service := grpcServer.New(log, cfg.Port, authApp.Description, authApp)
+	err := service.Start()
 	if err != nil {
 		panic(err)
 	}
@@ -32,6 +34,6 @@ func main() {
 
 	<-stop
 
-	s.GracefulShutdown()
+	service.GracefulShutdown()
 
 }
