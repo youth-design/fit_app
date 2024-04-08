@@ -6,6 +6,8 @@ import (
 	"github.com/youth-design/fit_app/services/auth/internal/config"
 	"github.com/youth-design/fit_app/services/auth/internal/grpc/server"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 const envProd = "prod"
@@ -24,4 +26,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, syscall.SIGTERM, syscall.SIGINT)
+
+	<-stop
+
+	s.GracefulShutdown()
+
 }
